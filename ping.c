@@ -118,9 +118,9 @@ main(int argc, char **argv)
 	u_char *packet;
 	char *target, hnamebuf[MAXHOSTNAMELEN];
 	union {
-		char rspace[3 + 4 * NROUTES + 1];       /* record route space */
-		uint32_t rspace32[(3 + 4 * NROUTES + 1)/4];
-	} rsp;
+	char rspace[3 + 4 * NROUTES + 1];  /* record route space */
+	uint32_t rspace32[(3 + 4 * NROUTES + 1)/4];
+	} rsp; 
 
 #ifdef ANDROID
 	if (getauxval(AT_SECURE) != 0) {
@@ -443,7 +443,7 @@ main(int argc, char **argv)
 		}
 	}
 	if (options & F_TIMESTAMP) {
-		bzero(rsp.rspace, sizeof(rsp.rspace));
+	        bzero(rsp.rspace, sizeof(rsp.rspace));
 		rsp.rspace[0] = IPOPT_TIMESTAMP;
 		rsp.rspace[1] = (ts_type==IPOPT_TS_TSONLY ? 40 : 36);
 		rsp.rspace[2] = 5;
@@ -465,7 +465,7 @@ main(int argc, char **argv)
 	}
 	if (options & F_SOURCEROUTE) {
 	        int i;
-		bzero(rsp.rspace, sizeof(rsp.rspace));
+	        bzero(rsp.rspace, sizeof(rsp.rspace));
 		rsp.rspace[0] = IPOPT_NOOP;
 		rsp.rspace[1+IPOPT_OPTVAL] = (options & F_SO_DONTROUTE) ? IPOPT_SSRR
 			: IPOPT_LSRR;
